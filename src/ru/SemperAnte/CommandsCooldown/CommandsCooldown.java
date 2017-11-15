@@ -50,7 +50,6 @@ public class CommandsCooldown extends JavaPlugin implements Listener
 				command = command.toLowerCase();
 				if (commands.containsKey(command) && !player.hasPermission("CommandCooldown.bypass"))
 				{
-					 System.out.println("REACH THERE");
 					 int coolDown = commands.get(command);
 					 long raz = System.currentTimeMillis() - users.getLong(player.getName() + "." + command);
 					 if (raz < coolDown)
