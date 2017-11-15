@@ -34,7 +34,7 @@ public class CommandsCooldown extends JavaPlugin implements Listener
 				commands.put(s.toLowerCase(), (int) cmds.get(s));
 		  cmds = config.getConfigurationSection("discount").getValues(true);
 		  for (String s : cmds.keySet())
-				commands.put(s.toLowerCase(), (int) cmds.get(s));
+				discount.put(s.toLowerCase(), (int) cmds.get(s));
 
 		  Bukkit.getPluginManager().registerEvents(this, this);
 	 }
