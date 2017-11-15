@@ -138,6 +138,12 @@ public class CommandsCooldown extends JavaPlugin implements Listener
 		  config = configClass.getConfig();
 		  usersCoolDown.reloadCFG();
 		  users = usersCoolDown.getConfig();
+		  Map<String, Object> cmds = config.getConfigurationSection("commands").getValues(true);
+		  for (String s : cmds.keySet())
+				commands.put(s.toLowerCase(), (int) cmds.get(s));
+		  cmds = config.getConfigurationSection("discount").getValues(true);
+		  for (String s : cmds.keySet())
+				discount.put(s.toLowerCase(), (int) cmds.get(s));
 	 }
 
 }
