@@ -69,7 +69,11 @@ public class CommandsCooldown extends JavaPlugin implements Listener
 	 }
 
 	 @Override public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
-	 {
+	 {	 if(!sender.hasPermission("CommandCooldown.commands"))
+		 {
+		 	 sender.sendMessage("[CommandCooldown] Permissions denied");
+		 	 return true;
+		 }
 		  try
 		  {
 				args[0] = args[0].toLowerCase();
