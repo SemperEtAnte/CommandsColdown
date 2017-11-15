@@ -54,7 +54,7 @@ public class CommandsCooldown extends JavaPlugin implements Listener
 					 long raz = System.currentTimeMillis() - users.getLong(player.getName() + "." + command);
 					 if (raz < coolDown)
 					 {
-						  player.sendMessage(ChatColor.GOLD + "[Задержка]" + ChatColor.RED + " Вы недавно отправляли эту команду. Подождите ещё " + raz + "с.");
+						  player.sendMessage(ChatColor.GOLD + "[Задержка] " + ChatColor.RED + " Вы недавно отправляли эту команду. Подождите ещё " + raz + "с.");
 						  event.setCancelled(true);
 					 }
 					 else
