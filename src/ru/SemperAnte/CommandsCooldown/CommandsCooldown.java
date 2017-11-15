@@ -56,16 +56,17 @@ public class CommandsCooldown extends JavaPlugin implements Listener
 				{
 					 int coolDown = commands.get(command);
 					 coolDown -= coolDown / 100 * discount(player);
-					 long raz = System.currentTimeMillis() - users.getLong(player.getName() + "." + command);
+					 long currentTime = System.currentTimeMillis() / 1000L;
+					 long raz = currentTime - users.getLong(player.getName() + "." + command);
 
 					 if (raz < coolDown)
 					 {
-						  player.sendMessage(ChatColor.GOLD + "[Задержка]" + ChatColor.RED + " Вы недавно отправляли эту команду. Подождите ещё " + raz + "с.");
+						  player.sendMessage(ChatColor.GOLD + "[Задержка]" + ChatColor.RED + " Вы недавно отправляли эту команду. Подождите ещё " + (coolDown-raz) + "с.");
 						  event.setCancelled(true);
 					 }
 					 else
 					 {
-						  users.set(player.getName() + "." + command, System.currentTimeMillis());
+						  users.set(player.getName() + "." + command, currentTime);
 						  usersCoolDown.saveConfig();
 					 }
 					 break;
@@ -84,11 +85,11 @@ public class CommandsCooldown extends JavaPlugin implements Listener
 
 	 @Override public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
 	 {
-	 	 if(!sender.hasPermission("CommandCooldown.commands"))
-		 {
-		 	 sender.sendMessage("[CommandCooldown] Permissions denied");
-		 	 return true;
-		 }
+		  if (!sender.hasPermission("CommandCooldown.commands"))
+		  {
+				sender.sendMessage("[CommandCooldown] Permissions denied");
+				return true;
+		  }
 		  try
 		  {
 				args[0] = args[0].toLowerCase();
