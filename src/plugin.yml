@@ -1,0 +1,8 @@
+name: CommandsCooldwn
+main:  ru.SemperAnte.CommandsCooldown.CommandsCooldown
+version: "0.1"
+commands:
+   CommandsCooldwn:
+    description: Plugin main command
+    aliases: [ComCol, comcol]
+    default: false

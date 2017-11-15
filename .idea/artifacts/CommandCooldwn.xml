@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="CommandCooldwn">
+    <output-path>$PROJECT_DIR$/out/artifacts/CommandCooldwn</output-path>
+    <root id="archive" name="CommandCooldwn.jar">
+      <element id="module-output" name="CommandsColdown" />
+    </root>
+  </artifact>
+</component>
