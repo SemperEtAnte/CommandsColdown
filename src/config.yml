@@ -1,2 +1,7 @@
 commands:
    EasyEnchant: 600
+discount:
+   citizen: 10
+   vip: 25
+   vipplus: 33
+   mer: 50

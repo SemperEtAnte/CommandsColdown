@@ -22,6 +22,7 @@ public class CommandsCooldown extends JavaPlugin implements Listener
 	 private Config configClass = new Config(this, "config.yml");
 	 private FileConfiguration config = configClass.getConfig();
 	 private Map<String, Integer> commands = new HashMap<>();
+	 private Map<String, Integer> discount = new HashMap<>();
 	 private Config usersCoolDown = new Config(this, "users.yml");
 	 private FileConfiguration users = usersCoolDown.getConfig();
 
@@ -29,6 +30,9 @@ public class CommandsCooldown extends JavaPlugin implements Listener
 	 public void onEnable()
 	 {
 		  Map<String, Object> cmds = config.getConfigurationSection("commands").getValues(true);
+		  for (String s : cmds.keySet())
+				commands.put(s.toLowerCase(), (int) cmds.get(s));
+		  cmds = config.getConfigurationSection("discount").getValues(true);
 		  for (String s : cmds.keySet())
 				commands.put(s.toLowerCase(), (int) cmds.get(s));
 
@@ -51,7 +55,9 @@ public class CommandsCooldown extends JavaPlugin implements Listener
 				if (commands.containsKey(command) && !player.hasPermission("CommandCooldown.bypass"))
 				{
 					 int coolDown = commands.get(command);
+					 coolDown -= coolDown / 100 * discount(player);
 					 long raz = System.currentTimeMillis() - users.getLong(player.getName() + "." + command);
+
 					 if (raz < coolDown)
 					 {
 						  player.sendMessage(ChatColor.GOLD + "[Задержка]" + ChatColor.RED + " Вы недавно отправляли эту команду. Подождите ещё " + raz + "с.");
@@ -66,6 +72,14 @@ public class CommandsCooldown extends JavaPlugin implements Listener
 				}
 		  }
 
+	 }
+
+	 private int discount(Player player)
+	 {
+		  for (String s : discount.keySet())
+				if (player.hasPermission("CommandCooldown.discount." + s))
+					 return discount.get(s);
+		  return 0;
 	 }
 
 	 @Override public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
